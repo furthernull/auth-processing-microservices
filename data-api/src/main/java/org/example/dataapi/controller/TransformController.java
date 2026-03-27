@@ -1,5 +1,6 @@
 package org.example.dataapi.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.dataapi.dto.TransformRequest;
 import org.example.dataapi.dto.TransformResponse;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("transform")
+@RequestMapping("/transform")
 @RequiredArgsConstructor
 public class TransformController {
     private final TransformService transformService;
@@ -24,7 +25,7 @@ public class TransformController {
     @PostMapping
     public TransformResponse transform(
             @RequestHeader("X-Internal-Token") String token,
-            @RequestBody TransformRequest request
+            @Valid @RequestBody TransformRequest request
     ) {
         if (!internalToken.equals(token)) {
             throw new InvalidInternalTokenException("Invalid internal token");
