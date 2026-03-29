@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-processing-log-table
+      author: dmytrosokolovskyi
+      changes:
+        - createTable:
+            tableName: processing_log
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_processing_log_users
+                    referencedTableName: users
+                    referencedColumnNames: id
+
+              - column:
+                  name: input_text
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: output_text
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
