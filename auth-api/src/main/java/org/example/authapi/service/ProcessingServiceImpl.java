@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.authapi.dto.DataApiResponse;
 import org.example.authapi.dto.ProcessRequest;
 import org.example.authapi.dto.ProcessResponse;
-import org.example.authapi.exception.UserNotFoundException;
 import org.example.authapi.model.ProcessingLog;
 import org.example.authapi.model.User;
 import org.example.authapi.repository.ProcessingLogRepository;
@@ -20,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Service
 public class ProcessingServiceImpl implements ProcessingService {
-    private final UserRepository userRepository;
     private final ProcessingLogRepository processingLogRepository;
     private final RestTemplate restTemplate;
 
@@ -31,10 +29,7 @@ public class ProcessingServiceImpl implements ProcessingService {
     private String internalToken;
 
     @Override
-    public ProcessResponse process(String email, ProcessRequest request) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("Can't find user: " + email));
-
+    public ProcessResponse process(User user, ProcessRequest request) {
         DataApiResponse dataApiResponse = callDataApi(request.text());
         saveLog(user, request.text(), dataApiResponse.result());
 

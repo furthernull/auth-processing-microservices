@@ -23,6 +23,6 @@ public class ProcessingController {
             @AuthenticationPrincipal User user,
             @RequestBody @Valid ProcessRequest request
     ){
-        return processingService.process(user.getEmail(), request);
+        return processingService.process(user, request);
     }
 }
