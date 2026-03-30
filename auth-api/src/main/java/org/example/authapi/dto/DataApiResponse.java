@@ -1,4 +1,4 @@
 package org.example.authapi.dto;
 
-public record DataApiResponse() {
+public record DataApiResponse(String result) {
 }

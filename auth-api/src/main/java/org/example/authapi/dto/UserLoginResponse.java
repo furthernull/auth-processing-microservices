@@ -1,4 +1,4 @@
 package org.example.authapi.dto;
 
-public record UserLoginResponse() {
+public record UserLoginResponse(String token) {
 }

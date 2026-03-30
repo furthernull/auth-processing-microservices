@@ -1,4 +1,10 @@
 package org.example.authapi.dto;
 
-public record UserRegistrationRequest() {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record UserRegistrationRequest(
+        @NotBlank @Email String email,
+        @NotBlank String password
+) {
 }

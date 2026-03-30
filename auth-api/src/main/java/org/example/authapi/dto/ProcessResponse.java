@@ -1,4 +1,4 @@
 package org.example.authapi.dto;
 
-public record ProcessResponse() {
+public record ProcessResponse(String result) {
 }
